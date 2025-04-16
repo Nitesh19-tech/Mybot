@@ -1,0 +1,33 @@
+    body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #chatbox {
+            width: 80%;
+            max-width: 600px;
+            height: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-y: auto;
+            margin: 20px auto;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+        #userInput {
+            width: 70%;
+            padding: 10px;
+            margin: 10px;
+        }
+        #sendButton {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #sendButton:hover {
+            background-color: #0056b3;
+        }

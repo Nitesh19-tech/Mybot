@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #chatbox {
+            width: 80%;
+            max-width: 600px;
+            height: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-y: auto;
+            margin: 20px auto;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+        #userInput {
+            width: 70%;
+            padding: 10px;
+            margin: 10px;
+        }
+        #sendButton {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #sendButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Type your message here...">
+    <button id="sendButton">Send</button>
+
+    <script>
+        $(document).ready(function() {
+            $("#sendButton").click(function() {
+                let userInput = $("#userInput").val().trim();
+                if (userInput === "") return;
+
+                let chatbox = $("#chatbox");
+
+                // ✅ User message show karein
+                chatbox.append("<p><strong>You:</strong> " + userInput + "</p>");
+
+                // ✅ AJAX Request with Render URL
+                $.ajax({
+                    url: "https://mentalhealthchatbot-u414.onrender.com/get_response/", // ✅ Correct Render API URL
+                    type: "GET",
+                    data: { query: userInput },
+                    dataType: "json",
+                    success: function(response) {
+                        chatbox.append("<p><strong>Bot:</strong> " + response.reply + "</p>");
+                        chatbox.scrollTop(chatbox[0].scrollHeight); // ✅ Auto-scroll down
+                    },
+                    error: function(xhr, status, error) {
+                        chatbox.append("<p><strong>Bot:</strong> ❌ Error fetching response!</p>");
+                        console.error("Error:", error);
+                    }
+                });
+
+                $("#userInput").val(""); // ✅ Clear input field
+            });
+
+            // ✅ Enter key support
+            $("#userInput").keypress(function(event) {
+                if (event.which === 13) { // 13 = Enter key
+                    $("#sendButton").click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
