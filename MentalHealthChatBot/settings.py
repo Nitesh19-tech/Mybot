@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-840t(+@bac+00(m3$)0sb@=x*(u!n(0m_bg=cqvji#a4t_=4p6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["mindmate2.netlify.app","127.0.0.1", "localhost"]
 
 
 # Application definition
